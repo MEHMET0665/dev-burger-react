@@ -1,5 +1,6 @@
 import React from 'react';
-import Login from './components/Login'
+import Login from './components/Login';
+import Order from './components/Order';
 import logo from './burger-logo.png';
 import './App.css';
 
@@ -9,17 +10,26 @@ class App extends React.Component {
     this.state = {
       username:'',
       password:'',
-      isLogin:false
+      patty:'',
+      amount: '',
+      doneness: '',
+      topping: '',
+      cheese: '',
+      bun: '',
+      sauce: '',
+      extra: '',
+      loggedIn:false
     };
     this.usercheck = this.usercheck.bind(this);
-    this.setUserName=this.setUserName.bind(this)
-    this.setPassword=this.setPassword.bind(this)
+    this.setUserName = this.setUserName.bind(this);
+    this.setPassword = this.setPassword.bind(this);
+    this.setInput = this.setInput.bind(this);
   }
-  
+
   usercheck(){
     if (this.state.username === "abc" && this.state.password === "123" ){
       this.setState({
-        isLogin:true
+        loggedIn:true
       })
     } else {
       alert('Username and Password doesn\'t match');
@@ -38,15 +48,22 @@ class App extends React.Component {
     })
   }
 
-  render(){
-    let currComponent=<div></div>
-    if (this.state.isLogin){
-      currComponent=<h1>You are successfully Logged in</h1>
+  setInput(property, value) {
+    this.setState({
+      [property]: value
+    })
+  }
 
-    }else{
-      currComponent=<Login userName={this.setUserName}
-      userpassword={this.setPassword}checkUser={this.usercheck}/>
+  render(){
+
+    let currComponent;
+    if(this.state.loggedIn) {
+      currComponent = <Order inputFunction={this.setInput}/>
+    } else {
+      currComponent = <Login userName={this.setUserName}
+      userpassword={this.setPassword} checkUser={this.usercheck}/>
     }
+
     return (
       <div className="App">
         <img src={logo} alt="Delicious Burger" id="logo" />
@@ -59,4 +76,5 @@ class App extends React.Component {
 }
 
 export default App;
+
 
