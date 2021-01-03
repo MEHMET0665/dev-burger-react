@@ -1,5 +1,6 @@
 import logo from './burger-logo.png';
 import './App.css';
+import Login from './components/Login'
 
 function App() {
   return (
@@ -8,8 +9,9 @@ function App() {
       <hr></hr>
 
       
-
+      <Login/>
     </div>
+  
   );
 }
 
