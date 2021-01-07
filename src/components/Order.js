@@ -1,8 +1,9 @@
 function Order(props) {
   function handleInput(e){
     props.inputFunction(e.target.name, e.target.value)
+    console.log(e.target.value)
   }
-
+ 
   return (
     <form>
       <h1>Create a burger!</h1>
@@ -80,9 +81,9 @@ function Order(props) {
       <hr/>
       <section className="submission">
         
-        <input type="submit" defaultValue="Submit" />
+        <input type="submit" defaultValue="Submit" onClick={props.submit}/>
       </section>
-    </form>
+    </form> 
   )
 }
 

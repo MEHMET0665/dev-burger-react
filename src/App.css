@@ -10,6 +10,10 @@ form {
   overflow: auto;
 }
 
+ul {
+  margin-left: 300px;
+  font-size: 20px;
+}
 form hr {
   width: 15%;
 }

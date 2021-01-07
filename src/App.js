@@ -19,14 +19,20 @@ class App extends React.Component {
       bun: '',
       sauce: '',
       extra: '',
-      loggedIn:false
+      loggedIn:false,
+      loggedIn1:false
     };
     this.usercheck = this.usercheck.bind(this);
     this.setUserName = this.setUserName.bind(this);
     this.setPassword = this.setPassword.bind(this);
     this.setInput = this.setInput.bind(this);
-  }
-
+    this.submit = this.submit.bind(this);
+    }
+submit(){
+  this.setState({
+    loggedIn1:true,
+  })
+}
   usercheck(){
     if (this.state.username === "abc" && this.state.password === "123" ){
       this.setState({
@@ -48,7 +54,7 @@ class App extends React.Component {
      password:UserPassword
     })
   }
-
+  
   setInput(property, value) {
     this.setState({
       [property]: value
@@ -58,18 +64,21 @@ class App extends React.Component {
   render(){
 
     let currComponent;
-    if(this.state.loggedIn) {
-      currComponent = <Order inputFunction={this.setInput}/>
-    } else {
+    if(this.state.loggedIn===true && this.state.loggedIn1===false) {
+      currComponent = <Order inputFunction={this.setInput} submit={this.submit}/>
+    } else if(this.state.loggedIn===false && this.state.loggedIn1===false) {
       currComponent = <Login userName={this.setUserName}
       userpassword={this.setPassword} checkUser={this.usercheck}/>
     }
+    else if(this.state.loggedIn1===true)
+    {currComponent = <Summary info={this.state}/>}
 
     return (
       <div className="App">
         <img src={logo} alt="Delicious Burger" id="logo" />
         <hr></hr>
         {currComponent}
+  
       </div>
     );
   }
